@@ -1,0 +1,78 @@
+export const en = {
+  sectionKeys: ['ABOUT', 'PROJECTS', 'WORK', 'CONTACT', 'CV'],
+  sectionLabels: {
+    ABOUT: 'ABOUT',
+    PROJECTS: 'PROJECTS',
+    WORK: 'WORK',
+    CONTACT: 'CONTACT',
+    CV: 'CV',
+  },
+  commands: {
+    about: 'About me',
+    projects: 'My side-projects',
+    work: 'Work experience',
+    contact: 'Contact info',
+    cv: 'Download CV',
+    hide: 'Hide terminal',
+  },
+  about: {
+    title: "Hi there, i'm Maxi!",
+    lines: [
+      '> This is my personal website, where you can find information about my professional work, side-projects, and how to get in touch with me.',
+      "> I'm a software developer based in Argentina   with over 2 years of experience building and maintaining software systems.",
+      '> I specialize in backend development using Rust, Go, and Java, and I also have frontend experience with Svelte and React.',
+      "> I've worked on blockchain-related systems, server-side services, and web platforms, contributing to system design and taking features from idea to implementation, as well as participating in planning and code reviews.",
+    ],
+  },
+  projects: {
+    title: 'PROJECTS',
+    items: [
+      {
+        name: 'The Hive',
+        url: 'https://github.com/maxipriani/the-hive',
+        description:
+          'Modular P2P Layer 0 node built on Tokio Actors and a custom in-memory IPC protocol to orchestrate asynchronous libp2p networking, featuring Gossipsub for message propagation and Kademlia DHT for decentralized peer discovery.',
+        tags: ['Rust'],
+      },
+      {
+        name: 'Volcano',
+        url: 'https://github.com/maxipriani/volcano',
+        description:
+          'External ESP for CS2 leveraging the WinAPI and Steam handle hijacking to perform cross-process memory reads, with offsets fetched at runtime, API-based authentication, and an ImGui overlay.',
+        tags: ['C++', 'Go'],
+      },
+    ],
+  },
+  work: {
+    title: 'WORK',
+    items: [
+      {
+        role: 'Software Developer',
+        company: 'Fermah',
+        companyUrl: 'https://fermah.xyz',
+        period: 'dec. 2025 – present',
+        description:
+          'Worked on a Rust-based blockchain oracle system, contributing to off-chain workflow execution, OCI/gVisor-based sandboxed containers, and integration with EVM smart contracts.',
+      },
+      {
+        role: 'Co-Founder & Software Engineer',
+        company: 'Caelum',
+        companyUrl: 'https://caelum.dev',
+        period: 'nov. 2025 – present',
+        description:
+          'Co-founded a software development company delivering tailored SaaS solutions for businesses by designing and building backend systems, multi-tenant architectures, and production deployments.',
+      },
+    ],
+  },
+  contact: {
+    title: 'CONTACT',
+  },
+  cv: {
+    title: 'CV',
+    downloadText: '[ DOWNLOAD CV ]',
+  },
+  errorNotFound: 'Command not found:',
+  errorHint: "Type 'help' for available commands",
+  inputPlaceholder: "type 'help' for commands...",
+  clickToShow: '[ SHOW TERMINAL ]',
+};
