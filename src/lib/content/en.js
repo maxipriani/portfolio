@@ -52,7 +52,7 @@ export const en = {
         companyUrl: 'https://fermah.xyz',
         period: 'dec. 2025 – present',
         description:
-          'Worked on a Rust-based blockchain oracle system, contributing to off-chain workflow execution, OCI/gVisor-based sandboxed containers, and integration with EVM smart contracts.',
+          'Working on a Rust-based blockchain oracle system, contributing to off-chain workflow execution, OCI/gVisor-based sandboxed containers, and integration with EVM smart contracts.',
       },
       {
         role: 'Co-Founder & Software Engineer',
@@ -73,6 +73,6 @@ export const en = {
   },
   errorNotFound: 'Command not found:',
   errorHint: "Type 'help' for available commands",
-  inputPlaceholder: "type 'help' for commands...",
+  inputPlaceholder: "'help' for commands...",
   clickToShow: '[ SHOW TERMINAL ]',
 };

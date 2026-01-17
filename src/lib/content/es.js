@@ -20,8 +20,8 @@ export const es = {
     lines: [
       '> Esta es mi web personal: acá podés ver mi experiencia profesional, mis proyectos personales y cómo contactarme.',
       '> Soy software developer con más de 2 años de experiencia trabajando en backend. En paralelo, estudio Ingeniería en Sistemas en la UTN FRBA.',
-      '> Mi stack principal es Rust | Go | Java para backend; y cuando hace falta, meto mano en frontend con Svelte y React.',
-      '> Trabajé en sistemas relacionados a blockchain, servicios server-side y web platforms: me gusta agarrar una feature, bajarla a diseño y llevarla hasta producción (planning, implementación y code reviews incluidos).',
+      '> Mi stack principal es Rust | Go | Java para backend, y ocasionalmente frontend con Svelte y React.',
+      '> Trabajé en sistemas relacionados con blockchain, servicios server-side y web platforms, desarrollando features end-to-end, desde diseño hasta producción.',
     ],
   },
   projects: {
@@ -73,6 +73,6 @@ export const es = {
   },
   errorNotFound: 'Comando no encontrado:',
   errorHint: "Escribí 'help' para ver los comandos",
-  inputPlaceholder: "escribí 'help' para ver comandos...",
+  inputPlaceholder: "'help' para comandos…",
   clickToShow: '[ MOSTRAR TERMINAL ]',
 };
