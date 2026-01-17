@@ -167,18 +167,18 @@
   }
 
   .project-title {
-    color: rgb(251, 255, 0);
+    color: #ffb000;
+    text-shadow: 0 0 15px #ffb000, 0 0 30px rgba(255, 176, 0, 0.5);
     font-weight: 700;
     font-size: 1.15em;
-    text-shadow: 0 0 15px rgb(255, 221, 0), 0 0 30px rgba(255, 247, 0, 0.5);
     text-decoration: underline;
     text-underline-offset: 4px;
     cursor: pointer;
   }
 
   .project-title:hover {
-    color: #eeff00;
-    text-shadow: 0 0 20px rgb(255, 221, 0), 0 0 40px rgb(255, 196, 0);
+    color: #ffc933;
+    text-shadow: 0 0 20px #ffb000, 0 0 40px #ffcc33;
   }
 
   .line-project-desc {
