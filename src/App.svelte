@@ -6,10 +6,6 @@
 
   let progressInterval;
 
-  function handleShowTerminal() {
-    showTerminal();
-  }
-
   onMount(() => {
     progressInterval = setInterval(() => {
       progress.update((p) => {
@@ -38,7 +34,7 @@
   {#if $terminalHidden}
     <div class="hidden-hint">
       <div class="hidden-hint-inner">
-        <button class="show-btn" on:click={handleShowTerminal}>
+        <button class="show-btn" on:click={showTerminal}>
           {$t.clickToShow}
         </button>
       </div>

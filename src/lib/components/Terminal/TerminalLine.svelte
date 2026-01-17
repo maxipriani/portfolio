@@ -167,18 +167,18 @@
   }
 
   .project-title {
-    color: #0ff;
+    color: rgb(251, 255, 0);
     font-weight: 700;
     font-size: 1.15em;
-    text-shadow: 0 0 15px #0ff, 0 0 30px rgba(0, 255, 255, 0.5);
+    text-shadow: 0 0 15px rgb(255, 221, 0), 0 0 30px rgba(255, 247, 0, 0.5);
     text-decoration: underline;
     text-underline-offset: 4px;
     cursor: pointer;
   }
 
   .project-title:hover {
-    color: #fff;
-    text-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+    color: #eeff00;
+    text-shadow: 0 0 20px rgb(255, 221, 0), 0 0 40px rgb(255, 196, 0);
   }
 
   .line-project-desc {
@@ -219,19 +219,6 @@
     font-size: 1.2em;
     color: #0f0;
     filter: drop-shadow(0 0 6px rgba(0, 255, 0, 0.6));
-  }
-
-  .clickable-link {
-    color: #ffd100;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-shadow: 0 0 15px rgba(255, 255, 44, 0.8);
-  }
-
-  .clickable-link:hover {
-    color: #ffffff;
   }
 
   .cv-download-btn {
