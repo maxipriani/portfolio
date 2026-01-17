@@ -63,23 +63,33 @@
       nodes.push({ mesh: node, pos: new THREE.Vector3(x, y, z) });
     }
 
+    const MAX_DIST = 20;
+    const MAX_CONNECTIONS = 10;
+
     for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const distance = nodes[i].pos.distanceTo(nodes[j].pos);
-        if (distance < 20) {
-          const lineMaterial = new THREE.LineBasicMaterial({ 
-            color: 0x00ff00, 
-            transparent: true, 
-            opacity: 0.2 
+      const candidates = [];
+
+      for (let j = 0; j < nodes.length; j++) {
+        if (i === j) continue;
+        const d = nodes[i].pos.distanceTo(nodes[j].pos);
+        if (d < MAX_DIST) candidates.push({ j, d });
+      }
+
+      candidates
+        .sort((a, b) => a.d - b.d)
+        .slice(0, MAX_CONNECTIONS)
+        .forEach(({ j, d }) => {
+          const opacity = Math.min(0.12, Math.max(0.0, (1 - d / MAX_DIST) * 0.15));
+          const lineMaterial = new THREE.LineBasicMaterial({
+            color: 0x00ff00,
+            transparent: true,
+            opacity
           });
-          const lineGeometry = new THREE.BufferGeometry().setFromPoints([
-            nodes[i].pos, 
-            nodes[j].pos
-          ]);
+
+          const lineGeometry = new THREE.BufferGeometry().setFromPoints([nodes[i].pos, nodes[j].pos]);
           const line = new THREE.Line(lineGeometry, lineMaterial);
           networkGroup.add(line);
-        }
-      }
+        });
     }
 
     scene.add(networkGroup);
