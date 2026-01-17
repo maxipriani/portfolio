@@ -24,9 +24,6 @@
     }
   });
 
-  $: if (inputRef) {
-    inputRef.focus();
-  }
 </script>
 
 <div class="terminal-input-area">

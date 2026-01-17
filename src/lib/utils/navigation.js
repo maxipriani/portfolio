@@ -112,8 +112,15 @@ export function showCV() {
   updateSection('CV', [{ text: content.cv.downloadText, type: 'cv-download' }]);
 }
 
+let cvInterval = null;
+
 export function downloadCV() {
   if (typeof window === 'undefined') return;
+
+  if (cvInterval) {
+    clearInterval(cvInterval);
+    cvInterval = null;
+  }
 
   updateSection('CV', [{ text: 'Download started...', type: 'output' }]);
 
@@ -130,7 +137,7 @@ export function downloadCV() {
   const totalSteps = 16;
   let step = 0;
 
-  const interval = setInterval(() => {
+  cvInterval = setInterval(() => {
     step++;
 
     const filled = '█'.repeat(step);
@@ -145,7 +152,8 @@ export function downloadCV() {
     );
 
     if (step >= totalSteps) {
-      clearInterval(interval);
+      clearInterval(cvInterval);
+      cvInterval = null;
 
       lines.update((prev) => [...prev, { text: 'OK', type: 'output' }]);
 
@@ -181,39 +189,37 @@ export function showError(command) {
   );
 }
 
+const SECTION_ACTIONS = {
+  ABOUT: showAbout,
+  PROJECTS: showProjects,
+  WORK: showWork,
+  CONTACT: showContact,
+  CV: showCV,
+  HELP: showHelp,
+};
+
+const COMMAND_ACTIONS = {
+  help: showHelp,
+  about: showAbout,
+  projects: showProjects,
+  work: showWork,
+  contact: showContact,
+  cv: downloadCV,
+  hide: hideTerminal,
+};
+
 export function navigateToSection(section) {
-  const sectionMap = {
-    ABOUT: showAbout,
-    PROJECTS: showProjects,
-    WORK: showWork,
-    CONTACT: showContact,
-    CV: showCV,
-    HELP: showHelp,
-  };
-  if (sectionMap[section]) {
-    sectionMap[section]();
-  }
+  const action = SECTION_ACTIONS[section];
+  if (action) action();
 }
 
 export function runCommand(cmd) {
   const trimmed = cmd.trim().toLowerCase();
   if (!trimmed) return;
 
-  const commandMap = {
-    help: showHelp,
-    about: showAbout,
-    projects: showProjects,
-    work: showWork,
-    contact: showContact,
-    cv: downloadCV,
-    hide: hideTerminal,
-  };
-
-  if (commandMap[trimmed]) {
-    commandMap[trimmed]();
-  } else {
-    showError(trimmed);
-  }
+  const action = COMMAND_ACTIONS[trimmed];
+  if (action) action();
+  else showError(trimmed);
 }
 
 export function initFromHash(sectionKeys) {
