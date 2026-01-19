@@ -21,7 +21,7 @@ export const en = {
       '> This is my personal website, where you can find information about my professional work, side-projects, and how to get in touch with me.',
       "> I'm a software developer based in Argentina   with over 2 years of experience building and maintaining software systems.",
       '> I specialize in backend development using Rust, Go, and Java, and I also have frontend experience with Svelte and React.',
-      "> I've worked on blockchain-related systems, server-side services, and web platforms, contributing to system design and taking features from idea to implementation, as well as participating in planning and code reviews.",
+      "> I've worked on Web3 infrastructure, server-side platforms, and distributed systems, contributing to system design and taking features from idea to implementation, as well as participating in planning and code reviews.",
     ],
   },
   work: {

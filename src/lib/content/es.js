@@ -21,7 +21,7 @@ export const es = {
       '> Esta es mi web personal: acá podés ver mi experiencia profesional, mis proyectos personales y cómo contactarme.',
       '> Soy software developer con más de 2 años de experiencia trabajando en backend. En paralelo, estudio Ingeniería en Sistemas en la UTN FRBA.',
       '> Mi stack principal es Rust | Go | Java para backend, y ocasionalmente frontend con Svelte y React.',
-      '> Trabajé en sistemas relacionados con blockchain, servicios server-side y web platforms, desarrollando features end-to-end, desde diseño hasta producción.',
+      '> Trabajé en infraestructura Web3, server-side services y sistemas distribuidos, desarrollando features end-to-end, desde diseño hasta producción.',
     ],
   },
   work: {
