@@ -61,6 +61,7 @@ class PortfolioState {
       url: item.url || null,
       icon: item.icon || null,
       company: item.company || null,
+      progress: item.progress || 0,
       id: generateId(i),
     }));
   }
@@ -186,28 +187,27 @@ class PortfolioState {
       this.cvInterval = null;
     }
 
-    this.updateSection('CV', [{ text: 'Download started...', type: 'output' }]);
+    this.updateSection('CV', [
+      {
+        type: 'progress-bar',
+        text: '[ DOWNLOADING CV... ]',
+        progress: 0,
+      },
+    ]);
 
-    const progressId = `cv-progress-${Date.now()}`;
-    this.lines.push({
-      id: progressId,
-      type: 'output',
-      text: '[░░░░░░░░░░░░░░░░] 0%',
-    });
+    const currentLineId = this.lines[0].id;
 
-    const totalSteps = 16;
+    const totalSteps = 20;
     let step = 0;
 
     this.cvInterval = setInterval(() => {
       step++;
-
-      const filled = '█'.repeat(step);
-      const empty = '░'.repeat(totalSteps - step);
       const percent = Math.round((step / totalSteps) * 100);
-      const bar = `[${filled}${empty}] ${percent}%`;
 
-      const lineIndex = this.lines.findIndex((l) => l.id === progressId);
-      if (lineIndex !== -1) this.lines[lineIndex].text = bar;
+      const lineIndex = this.lines.findIndex((l) => l.id === currentLineId);
+      if (lineIndex !== -1) {
+        this.lines[lineIndex].progress = percent;
+      }
 
       if (step >= totalSteps) {
         clearInterval(this.cvInterval);
@@ -222,7 +222,7 @@ class PortfolioState {
         link.click();
         document.body.removeChild(link);
       }
-    }, 80);
+    }, 50);
   }
 
   showError(command) {

@@ -1,6 +1,7 @@
 <script>
   import { CONFIG } from '../../config/index.js';
   import { appState } from '../../state.svelte.js';
+  import Loading from '../Loading/Loading.svelte';
 
   let { line } = $props();
   
@@ -111,6 +112,9 @@
     <button class="cv-download-btn" onclick={() => appState.downloadCV()}>
       {line.text}
     </button>
+
+  {:else if line.type === 'progress-bar'}
+    <Loading progress={line.progress} text={line.text} compact={true} />
 
   {:else if line.type === 'greeting'}
     <span class="greeting-text">{line.text}</span>
