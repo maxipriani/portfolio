@@ -1,9 +1,9 @@
 export const es = {
-  sectionKeys: ['ABOUT', 'PROJECTS', 'WORK', 'CONTACT', 'CV'],
+  sectionKeys: ['ABOUT', 'WORK', 'PROJECTS', 'CONTACT', 'CV'],
   sectionLabels: {
     ABOUT: 'SOBRE MÍ',
-    PROJECTS: 'PROYECTOS',
     WORK: 'EXPERIENCIA',
+    PROJECTS: 'PROYECTOS',
     CONTACT: 'CONTACTO',
     CV: 'CV',
   },
@@ -24,25 +24,6 @@ export const es = {
       '> Trabajé en sistemas relacionados con blockchain, servicios server-side y web platforms, desarrollando features end-to-end, desde diseño hasta producción.',
     ],
   },
-  projects: {
-    title: 'PROYECTOS',
-    items: [
-      {
-        name: 'The Hive',
-        url: 'https://github.com/maxipriani/the-hive',
-        description:
-          'Nodo modular P2P "Layer 0" hecho en Rust, basado en Tokio Actors y un IPC in-memory propio para coordinar networking async con libp2p; usa Gossipsub para message propagation y Kademlia DHT para peer discovery descentralizado.',
-        tags: ['Rust'],
-      },
-      {
-        name: 'Volcano',
-        url: 'https://github.com/maxipriani/volcano',
-        description:
-          'External ESP para CS2: WinAPI + Steam handle hijacking para cross-process memory reads; offsets fetched en runtime, auth via API y un overlay con ImGui.',
-        tags: ['C++', 'Go'],
-      },
-    ],
-  },
   work: {
     title: 'EXPERIENCIA',
     items: [
@@ -61,6 +42,25 @@ export const es = {
         period: 'nov. 2025 – actualidad',
         description:
           'Soy Co-Founder de una software factory enfocada en SaaS a medida para empresas,  donde desarrollo sistemas backend, arquitecturas multi-tenant y deployments a producción.',
+      },
+    ],
+  },
+  projects: {
+    title: 'PROYECTOS',
+    items: [
+      {
+        name: 'The Hive',
+        url: 'https://github.com/maxipriani/the-hive',
+        description:
+          'Nodo modular P2P "Layer 0" hecho en Rust, basado en Tokio Actors y un IPC in-memory propio para coordinar networking async con libp2p; usa Gossipsub para message propagation y Kademlia DHT para peer discovery descentralizado.',
+        tags: ['Rust'],
+      },
+      {
+        name: 'Volcano',
+        url: 'https://github.com/maxipriani/volcano',
+        description:
+          'External ESP para CS2: WinAPI + Steam handle hijacking para cross-process memory reads; offsets fetched en runtime, auth via API y un overlay con ImGui.',
+        tags: ['C++', 'Go'],
       },
     ],
   },

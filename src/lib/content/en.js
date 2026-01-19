@@ -1,9 +1,9 @@
 export const en = {
-  sectionKeys: ['ABOUT', 'PROJECTS', 'WORK', 'CONTACT', 'CV'],
+  sectionKeys: ['ABOUT', 'WORK', 'PROJECTS', 'CONTACT', 'CV'],
   sectionLabels: {
     ABOUT: 'ABOUT',
-    PROJECTS: 'PROJECTS',
     WORK: 'WORK',
+    PROJECTS: 'PROJECTS',
     CONTACT: 'CONTACT',
     CV: 'CV',
   },
@@ -24,25 +24,6 @@ export const en = {
       "> I've worked on blockchain-related systems, server-side services, and web platforms, contributing to system design and taking features from idea to implementation, as well as participating in planning and code reviews.",
     ],
   },
-  projects: {
-    title: 'PROJECTS',
-    items: [
-      {
-        name: 'The Hive',
-        url: 'https://github.com/maxipriani/the-hive',
-        description:
-          'Modular P2P Layer 0 node built on Tokio Actors and a custom in-memory IPC protocol to orchestrate asynchronous libp2p networking, featuring Gossipsub for message propagation and Kademlia DHT for decentralized peer discovery.',
-        tags: ['Rust'],
-      },
-      {
-        name: 'Volcano',
-        url: 'https://github.com/maxipriani/volcano',
-        description:
-          'External ESP for CS2 leveraging the WinAPI and Steam handle hijacking to perform cross-process memory reads, with offsets fetched at runtime, API-based authentication, and an ImGui overlay.',
-        tags: ['C++', 'Go'],
-      },
-    ],
-  },
   work: {
     title: 'WORK',
     items: [
@@ -61,6 +42,25 @@ export const en = {
         period: 'nov. 2025 – present',
         description:
           'Co-founded a software development company delivering tailored SaaS solutions for businesses by designing and building backend systems, multi-tenant architectures, and production deployments.',
+      },
+    ],
+  },
+  projects: {
+    title: 'PROJECTS',
+    items: [
+      {
+        name: 'The Hive',
+        url: 'https://github.com/maxipriani/the-hive',
+        description:
+          'Modular P2P Layer 0 node built on Tokio Actors and a custom in-memory IPC protocol to orchestrate asynchronous libp2p networking, featuring Gossipsub for message propagation and Kademlia DHT for decentralized peer discovery.',
+        tags: ['Rust'],
+      },
+      {
+        name: 'Volcano',
+        url: 'https://github.com/maxipriani/volcano',
+        description:
+          'External ESP for CS2 leveraging the WinAPI and Steam handle hijacking to perform cross-process memory reads, with offsets fetched at runtime, API-based authentication, and an ImGui overlay.',
+        tags: ['C++', 'Go'],
       },
     ],
   },
