@@ -19,16 +19,16 @@ export const en = {
     title: "Hi there, i'm Maxi!",
     lines: [
       '> This is my personal website, where you can find information about my professional work, side-projects, and how to get in touch with me.',
-      "> I'm a software developer based in Argentina   with over 2 years of experience building and maintaining software systems.",
+      "> I'm a Software Engineer based in Argentina with 2+ years of experience building and maintaining software systems.",
       '> I specialize in backend development using Rust, Go, and Java, and I also have frontend experience with Svelte and React.',
-      "> I've worked on blockchain-related systems, server-side services, and web platforms, contributing to system design and taking features from idea to implementation, as well as participating in planning and code reviews.",
+      "> I've worked on Web3 infrastructure, server-side platforms, and distributed systems, contributing to system design and taking features from idea to implementation, as well as participating in planning and code reviews.",
     ],
   },
   work: {
     title: 'WORK',
     items: [
       {
-        role: 'Software Developer',
+        role: 'Rust Engineer',
         company: 'Fermah',
         companyUrl: 'https://fermah.xyz',
         period: 'dec. 2025 – present',
@@ -49,17 +49,24 @@ export const en = {
     title: 'PROJECTS',
     items: [
       {
-        name: 'The Hive',
-        url: 'https://github.com/maxipriani/the-hive',
+        name: 'Peernet',
+        url: 'https://github.com/maxipriani/peernet',
         description:
-          'Modular P2P Layer 0 node built on Tokio Actors and a custom in-memory IPC protocol to orchestrate asynchronous libp2p networking, featuring Gossipsub for message propagation and Kademlia DHT for decentralized peer discovery.',
+          'Modular peer-to-peer network node built on libp2p. Nodes discover each other via mDNS, store distributed key-value data through Kademlia DHT, and broadcast messages using Gossipsub. The network layer runs as an async actor behind typed command/event channels.',
+        tags: ['Rust'],
+      },
+      {
+        name: 'rs-market',
+        url: 'https://github.com/maxipriani/rs-market',
+        description:
+        'Rust-based gift card marketplace.',
         tags: ['Rust'],
       },
       {
         name: 'Volcano',
         url: 'https://github.com/maxipriani/volcano',
         description:
-          'External ESP for CS2 leveraging the WinAPI and Steam handle hijacking to perform cross-process memory reads, with offsets fetched at runtime, API-based authentication, and an ImGui overlay.',
+        'External ESP for CS2 leveraging the WinAPI and Steam handle hijacking to perform cross-process memory reads, with offsets fetched at runtime, API-based authentication, and an ImGui overlay.',
         tags: ['C++', 'Go'],
       },
     ],

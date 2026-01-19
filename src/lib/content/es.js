@@ -19,21 +19,21 @@ export const es = {
     title: 'Hola, soy Maxi!',
     lines: [
       '> Esta es mi web personal: acá podés ver mi experiencia profesional, mis proyectos personales y cómo contactarme.',
-      '> Soy software developer con más de 2 años de experiencia trabajando en backend. En paralelo, estudio Ingeniería en Sistemas en la UTN FRBA.',
-      '> Mi stack principal es Rust | Go | Java para backend, y ocasionalmente frontend con Svelte y React.',
-      '> Trabajé en sistemas relacionados con blockchain, servicios server-side y web platforms, desarrollando features end-to-end, desde diseño hasta producción.',
+      '> Soy Software Engineer con más de 2 años de experiencia trabajando en backend. En paralelo, estudio Ingeniería en Sistemas en la UTN FRBA.',
+      '> Mi stack principal es: Rust, Go y Java en backend; ocasionalmente frontend con Svelte o React.',
+      '> Trabajé en Web3 infrastructure, server-side services y sistemas distribuidos, desarrollando features end-to-end, desde diseño hasta producción.',
     ],
   },
   work: {
     title: 'EXPERIENCIA',
     items: [
       {
-        role: 'Software Developer',
+        role: 'Rust Engineer',
         company: 'Fermah',
         companyUrl: 'https://fermah.xyz',
         period: 'dic. 2025 – actualidad',
         description:
-          'Trabajo en Fermah como software developer, desarrollando en Rust un oracle server que ejecuta workflows off-chain de forma sandboxed (OCI/gVisor), a partir de eventos on-chain, y devuelve los resultados a smart contracts en EVM.',
+          'Trabajo en Fermah como Rust Engineer, desarrollando un oracle server que ejecuta workflows off-chain de forma sandboxed (OCI/gVisor), a partir de eventos on-chain, y devuelve los resultados a smart contracts en EVM.',
       },
       {
         role: 'Co-Founder & Software Engineer',
@@ -49,17 +49,24 @@ export const es = {
     title: 'PROYECTOS',
     items: [
       {
-        name: 'The Hive',
-        url: 'https://github.com/maxipriani/the-hive',
+        name: 'Peernet',
+        url: 'https://github.com/maxipriani/peernet',
         description:
-          'Nodo modular P2P "Layer 0" hecho en Rust, basado en Tokio Actors y un IPC in-memory propio para coordinar networking async con libp2p; usa Gossipsub para message propagation y Kademlia DHT para peer discovery descentralizado.',
+          'Nodo peer-to-peer modular construido sobre libp2p. Los nodos se descubren entre sí vía mDNS, almacenan datos distribuidos key-value mediante una Kademlia DHT y difunden mensajes usando Gossipsub (pub/sub). La capa de red corre como un async actor y se expone a través de typed command/event channels.',
+        tags: ['Rust'],
+      },
+      {
+        name: 'rs-market',
+        url: 'https://github.com/maxipriani/rs-market',
+        description:
+          'Marketplace de gift cards 100% en Rust.',
         tags: ['Rust'],
       },
       {
         name: 'Volcano',
         url: 'https://github.com/maxipriani/volcano',
         description:
-          'External ESP para CS2: WinAPI + Steam handle hijacking para cross-process memory reads; offsets fetched en runtime, auth via API y un overlay con ImGui.',
+        'External ESP para CS2: WinAPI + Steam handle hijacking para cross-process memory reads; offsets fetched en runtime, auth via API y un overlay con ImGui.',
         tags: ['C++', 'Go'],
       },
     ],
