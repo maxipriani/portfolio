@@ -1,25 +1,23 @@
 <script>
   import { onMount } from 'svelte';
-  import { loading, progress, t, terminalHidden } from './lib/stores/index.js';
-  import { initFromHash, showTerminal } from './lib/utils/navigation.js';
+  import { appState } from './lib/state.svelte.js';
   import { Background, Sidebar, Terminal } from './lib/components/index.js';
 
   let progressInterval;
 
   onMount(() => {
     progressInterval = setInterval(() => {
-      progress.update((p) => {
-        if (p >= 100) {
-          clearInterval(progressInterval);
-          return 100;
-        }
-        return Math.min(p + 3, 100);
-      });
+      if (appState.progress >= 100) {
+        clearInterval(progressInterval);
+        appState.progress = 100;
+        return;
+      }
+      appState.progress = Math.min(appState.progress + 3, 100);
     }, 30);
 
     setTimeout(() => {
-      loading.set(false);
-      initFromHash($t.sectionKeys);
+      appState.loading = false;
+      appState.initFromHash(appState.content.sectionKeys);
     }, 1200);
 
     return () => {
@@ -31,11 +29,11 @@
 <div class="app-container">
   <Background />
 
-  {#if $terminalHidden}
+  {#if appState.terminalHidden}
     <div class="hidden-hint">
       <div class="hidden-hint-inner">
-        <button class="show-btn" on:click={showTerminal}>
-          {$t.clickToShow}
+        <button class="show-btn" onclick={() => appState.showTerminal()}>
+          {appState.content.clickToShow}
         </button>
       </div>
     </div>
@@ -56,7 +54,7 @@
   .app-container {
     position: relative;
     min-height: 100dvh;
-    background: #000;
+    background: var(--term-bg);
     overflow-x: hidden;
     overflow-y: auto;
   }
@@ -106,12 +104,12 @@
   }
 
   .show-btn {
-    color: #0f0;
+    color: var(--term-color);
     font-family: inherit;
     font-size: 16px;
-    text-shadow: 0 0 20px #0f0, 0 0 40px #0f0;
+    text-shadow: var(--text-shadow-md);
     padding: 14px 28px;
-    border: 2px solid #0f0;
+    border: 2px solid var(--term-color);
     background: rgba(0, 20, 0, 0.9);
     cursor: pointer;
     transition: all 0.3s ease;
@@ -124,7 +122,7 @@
   .show-btn:hover {
     background: rgba(0, 255, 0, 0.2);
     box-shadow: 0 0 30px rgba(0, 255, 0, 0.6), inset 0 0 30px rgba(0, 255, 0, 0.2);
-    text-shadow: 0 0 30px #0f0, 0 0 60px #0f0;
+    text-shadow: 0 0 30px var(--term-color), 0 0 60px var(--term-color);
   }
 
   .scanlines {

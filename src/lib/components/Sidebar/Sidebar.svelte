@@ -1,86 +1,85 @@
 <script>
-  import { t, activeSection } from '../../stores/index.js';
-  import { navigateToSection } from '../../utils/navigation.js';
+  import { appState } from '../../state.svelte.js';
   import { fade, fly } from 'svelte/transition';
 
-  let menuOpen = false;
+  let menuOpen = $state(false);
 
   function go(sectionKey) {
-    navigateToSection(sectionKey);
+    appState.navigateToSection(sectionKey);
     menuOpen = false;
   }
 </script>
 
-  <aside class="sidebar">
-    <nav class="sidebar-nav desktop-nav">
-      {#each $t.sectionKeys as sectionKey}
-        <button
-          class="nav-item"
-          class:active={$activeSection === sectionKey}
-          on:click={() => navigateToSection(sectionKey)}
-          type="button"
-        >
-          <span class="nav-arrow" class:visible={$activeSection === sectionKey}></span>
-          {$t.sectionLabels[sectionKey]}
-        </button>
-      {/each}
-    </nav>
-
-    <div class="mobile-nav">
+<aside class="sidebar">
+  <nav class="sidebar-nav desktop-nav">
+    {#each appState.content.sectionKeys as sectionKey}
       <button
-        class="hamburger"
-        class:open={menuOpen}
+        class="nav-item"
+        class:active={appState.activeSection === sectionKey}
+        onclick={() => appState.navigateToSection(sectionKey)}
         type="button"
-        on:click={() => (menuOpen = !menuOpen)}
-        aria-label="Open menu"
-        aria-expanded={menuOpen}
       >
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
+        <span class="nav-arrow" class:visible={appState.activeSection === sectionKey}></span>
+        {appState.content.sectionLabels[sectionKey]}
       </button>
+    {/each}
+  </nav>
 
-      {#if menuOpen}
-        <div
-          class="dropdown"
-          role="menu"
-          in:fly={{ y: -8, duration: 160 }}
-          out:fade={{ duration: 140 }}
-        >
-          {#each $t.sectionKeys as sectionKey}
-            <button
-              class="dropdown-item"
-              class:active={$activeSection === sectionKey}
-              on:click={() => go(sectionKey)}
-              type="button"
-              role="menuitem"
-            >
-              {$t.sectionLabels[sectionKey]}
-            </button>
-          {/each}
-        </div>
+  <div class="mobile-nav">
+    <button
+      class="hamburger"
+      class:open={menuOpen}
+      type="button"
+      onclick={() => (menuOpen = !menuOpen)}
+      aria-label="Open menu"
+      aria-expanded={menuOpen}
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
 
-        <button
-          class="backdrop"
-          type="button"
-          aria-label="Close menu"
-          on:click={() => (menuOpen = false)}
-        ></button>
-      {/if}
-    </div>
-  </aside>
+    {#if menuOpen}
+      <div
+        class="dropdown"
+        role="menu"
+        in:fly={{ y: -8, duration: 160 }}
+        out:fade={{ duration: 140 }}
+      >
+        {#each appState.content.sectionKeys as sectionKey}
+          <button
+            class="dropdown-item"
+            class:active={appState.activeSection === sectionKey}
+            onclick={() => go(sectionKey)}
+            type="button"
+            role="menuitem"
+          >
+            {appState.content.sectionLabels[sectionKey]}
+          </button>
+        {/each}
+      </div>
+
+      <button
+        class="backdrop"
+        type="button"
+        aria-label="Close menu"
+        onclick={() => (menuOpen = false)}
+      ></button>
+    {/if}
+  </div>
+</aside>
 
 <style>
   .sidebar {
     width: 200px;
     flex-shrink: 0;
-    background: rgba(0, 5, 0, 0.98);
-    border: 2px solid #0f0;
+    background: var(--term-bg-panel);
+    border: 2px solid var(--term-color);
     border-right: none;
     display: flex;
     flex-direction: column;
     box-shadow:
-      0 0 40px rgba(0, 255, 0, 0.4),
+      0 0 40px var(--term-color-dim),
       inset 0 0 60px rgba(0, 255, 0, 0.03);
     position: relative;
   }
@@ -99,7 +98,7 @@
     padding: 20px 24px;
     background: transparent;
     border: none;
-    color: #0f0;
+    color: var(--term-color);
     text-align: left;
     cursor: pointer;
     font-family: inherit;
@@ -107,18 +106,18 @@
     font-weight: 500;
     transition: all 0.2s;
     gap: 12px;
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    text-shadow: var(--text-shadow-sm);
   }
 
   .nav-item:hover {
     background: rgba(0, 255, 0, 0.15);
-    text-shadow: 0 0 20px #0f0, 0 0 40px #0f0;
+    text-shadow: var(--text-shadow-md);
   }
 
   .nav-item.active {
     background: linear-gradient(90deg, rgba(0, 255, 0, 0.25) 0%, rgba(0, 255, 0, 0.05) 100%);
-    text-shadow: 0 0 25px #0f0, 0 0 50px #0f0;
-    border-right: 3px solid #0f0;
+    text-shadow: 0 0 25px var(--term-color), 0 0 50px var(--term-color);
+    border-right: 3px solid var(--term-color);
     margin-right: -2px;
   }
 
@@ -127,10 +126,10 @@
     height: 0;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
-    border-left: 12px solid #0f0;
+    border-left: 12px solid var(--term-color);
     opacity: 0;
     transition: all 0.2s;
-    filter: drop-shadow(0 0 8px #0f0);
+    filter: drop-shadow(0 0 8px var(--term-color));
   }
 
   .nav-arrow.visible {
@@ -148,7 +147,6 @@
     box-shadow: none;
     padding: 10px;
     cursor: pointer;
-
     display: inline-flex;
     flex-direction: column;
     gap: 6px;
@@ -157,7 +155,7 @@
   .hamburger .bar {
     width: 26px;
     height: 2px;
-    background: #0f0;
+    background: var(--term-color);
     box-shadow: 0 0 12px rgba(0, 255, 0, 0.35);
     transition: transform 180ms ease, opacity 140ms ease;
     transform-origin: center;
@@ -180,7 +178,7 @@
     top: 58px;
     left: 12px;
     width: 220px;
-    background: rgba(0, 8, 0, 0.98);
+    background: var(--term-bg-panel);
     border: 1px solid rgba(0, 255, 0, 0.35);
     box-shadow: 0 0 24px rgba(0, 255, 0, 0.22);
     padding: 8px;
@@ -191,22 +189,22 @@
     width: 100%;
     background: transparent;
     border: none;
-    color: #0f0;
+    color: var(--term-color);
     text-align: left;
     padding: 10px 10px;
     cursor: pointer;
     font-size: 16px;
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    text-shadow: var(--text-shadow-sm);
   }
 
   .dropdown-item:hover {
     background: rgba(0, 255, 0, 0.15);
-    text-shadow: 0 0 20px #0f0, 0 0 40px #0f0;
+    text-shadow: var(--text-shadow-md);
   }
 
   .dropdown-item.active {
     background: linear-gradient(90deg, rgba(0, 255, 0, 0.25) 0%, rgba(0, 255, 0, 0.05) 100%);
-    text-shadow: 0 0 25px #0f0, 0 0 50px #0f0;
+    text-shadow: 0 0 25px var(--term-color), 0 0 50px var(--term-color);
   }
 
   .backdrop {
@@ -220,7 +218,7 @@
   @media (max-width: 768px) {
     .sidebar {
       width: 100%;
-      border: 2px solid #0f0;
+      border: 2px solid var(--term-color);
       border-bottom: none;
     }
 

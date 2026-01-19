@@ -1,16 +1,18 @@
 <script>
-  import { lines } from '../../stores/index.js';
+  import { appState } from '../../state.svelte.js';
   import TerminalLine from './TerminalLine.svelte';
 
   let outputRef;
 
-  $: if (outputRef && $lines) {
-    outputRef.scrollTop = 0;
-  }
+  $effect(() => {
+    if (outputRef && appState.lines) {
+      outputRef.scrollTop = outputRef.scrollHeight;
+    }
+  });
 </script>
 
 <div bind:this={outputRef} class="terminal-output">
-  {#each $lines as line (line.id)}
+  {#each appState.lines as line (line.id)}
     <TerminalLine {line} />
   {/each}
 </div>

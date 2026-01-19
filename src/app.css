@@ -1,17 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
+:root {
+  --term-color: #00ff00;
+  --term-color-dim: rgba(0, 255, 0, 0.5);
+  --term-color-glow: rgba(0, 255, 0, 0.8);
+  --term-bg: #000000;
+  --term-bg-panel: rgba(0, 8, 0, 0.98);
+  --term-bg-translucent: rgba(0, 20, 0, 0.9);
+
+  --color-command: #ffff00;
+  --color-link: #ffb000;
+  --color-link-hover: #ffc933;
+  --color-error: #ff0000;
+
+  --font-main: 'Share Tech Mono', monospace;
+
+  --shadow-sm: 0 0 10px var(--term-color-dim);
+  --shadow-md: 0 0 20px var(--term-color-dim);
+  --shadow-lg: 0 0 40px var(--term-color-dim);
+  --text-shadow-sm: 0 0 8px var(--term-color-dim);
+  --text-shadow-md: 0 0 15px var(--term-color-glow);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: var(--font-main);
 }
 
 html,
 body {
   height: 100%;
-  background: #000;
-  color: #0f0;
+  background: var(--term-bg);
+  color: var(--term-color);
   overflow-x: hidden;
 }
 
@@ -29,11 +51,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: var(--term-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0f0;
+  background: var(--term-color);
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+  box-shadow: var(--shadow-sm);
 }

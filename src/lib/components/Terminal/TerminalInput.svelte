@@ -1,15 +1,14 @@
 <script>
   import { onMount } from 'svelte';
   import { CONFIG } from '../../config/index.js';
-  import { t, inputValue } from '../../stores/index.js';
-  import { runCommand } from '../../utils/navigation.js';
+  import { appState } from '../../state.svelte.js';
 
   let inputRef;
 
   function handleSubmit() {
-    if (!$inputValue.trim()) return;
-    runCommand($inputValue);
-    inputValue.set('');
+    if (!appState.inputValue.trim()) return;
+    appState.runCommand(appState.inputValue);
+    appState.inputValue = '';
   }
 
   function handleKeydown(e) {
@@ -23,7 +22,6 @@
       inputRef.focus();
     }
   });
-
 </script>
 
 <div class="terminal-input-area">
@@ -32,16 +30,16 @@
     bind:this={inputRef}
     type="text"
     class="terminal-input"
-    bind:value={$inputValue}
-    placeholder={$t.inputPlaceholder}
+    bind:value={appState.inputValue}
+    placeholder={appState.content.inputPlaceholder}
     autocomplete="off"
-    on:keydown={handleKeydown}
+    onkeydown={handleKeydown}
   />
 </div>
 
 <style>
   .terminal-input-area {
-    border-top: 2px solid #00ff00;
+    border-top: 2px solid var(--term-color);
     background: linear-gradient(180deg, rgba(0, 30, 0, 0.8) 0%, rgba(0, 20, 0, 0.95) 100%);
     padding: 16px 32px;
     display: flex;
@@ -51,7 +49,7 @@
   }
 
   .prompt {
-    color: #00ff00;
+    color: var(--term-color);
     white-space: nowrap;
     font-size: 17px;
     text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
@@ -62,11 +60,11 @@
     background: transparent;
     border: none;
     outline: none;
-    color: #00ff00;
+    color: var(--term-color);
     font-family: inherit;
     font-size: 17px;
-    text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
-    caret-color: #00ff00;
+    text-shadow: var(--text-shadow-sm);
+    caret-color: var(--term-color);
   }
 
   .terminal-input::placeholder {

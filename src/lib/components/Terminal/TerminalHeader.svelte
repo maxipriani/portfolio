@@ -1,22 +1,9 @@
 <script>
-  import { lang, activeSection } from '../../stores/index.js';
-  import { navigateToSection, hideTerminal, showAbout } from '../../utils/navigation.js';
-
-  function switchLang(newLang) {
-    if ($lang === newLang) return;
-    const currentSection = $activeSection;
-    lang.set(newLang);
-    
-    if (currentSection) {
-      setTimeout(() => navigateToSection(currentSection), 0);
-    } else {
-      setTimeout(() => showAbout(), 0);
-    }
-  }
+  import { appState } from '../../state.svelte.js';
 
   function handleMinimize(e) {
     e.stopPropagation();
-    hideTerminal();
+    appState.hideTerminal();
   }
 </script>
 
@@ -24,7 +11,7 @@
   <div class="header-left">
     <div class="terminal-dots">
       <div class="dot dot-red"></div>
-      <button class="dot dot-yellow" on:click={handleMinimize}></button>
+      <button class="dot dot-yellow" onclick={handleMinimize}></button>
       <div class="dot dot-green"></div>
     </div>
   </div>
@@ -33,16 +20,16 @@
     <div class="lang-switch">
       <button 
         class="lang-btn" 
-        class:active={$lang === 'en'} 
-        on:click={() => switchLang('en')}
+        class:active={appState.lang === 'en'} 
+        onclick={() => appState.setLang('en')}
       >
         EN
       </button>
       <span class="lang-separator">|</span>
       <button 
         class="lang-btn" 
-        class:active={$lang === 'es'} 
-        on:click={() => switchLang('es')}
+        class:active={appState.lang === 'es'} 
+        onclick={() => appState.setLang('es')}
       >
         ES
       </button>
@@ -57,8 +44,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 2px solid #00ff00;
-    box-shadow: 0 2px 20px rgba(0, 255, 0, 0.3);
+    border-bottom: 2px solid var(--term-color);
+    box-shadow: 0 2px 20px var(--term-color-dim);
   }
 
   .header-left {
@@ -115,31 +102,31 @@
   .lang-btn {
     background: transparent;
     border: none;
-    color: #00ff00;
+    color: var(--term-color);
     padding: 6px 12px;
     cursor: pointer;
     font-family: inherit;
     font-size: 15px;
     transition: all 0.2s;
-    text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+    text-shadow: var(--text-shadow-sm);
     opacity: 0.6;
   }
 
   .lang-btn:hover {
     opacity: 1;
-    text-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+    text-shadow: var(--text-shadow-md);
   }
 
   .lang-btn.active {
     opacity: 1;
     text-decoration: underline;
     text-underline-offset: 4px;
-    text-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+    text-shadow: var(--text-shadow-md);
   }
 
   .lang-separator {
-    color: #00ff00;
+    color: var(--term-color);
     opacity: 0.6;
-    text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+    text-shadow: var(--text-shadow-sm);
   }
 </style>

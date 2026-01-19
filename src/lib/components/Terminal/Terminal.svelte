@@ -1,5 +1,5 @@
 <script>
-  import { loading, progress } from '../../stores/index.js';
+  import { appState } from '../../state.svelte.js';
   import TerminalHeader from './TerminalHeader.svelte';
   import TerminalOutput from './TerminalOutput.svelte';
   import TerminalInput from './TerminalInput.svelte';
@@ -12,16 +12,16 @@
     <TerminalHeader />
     
     <div class="terminal-body">
-      {#if $loading}
+      {#if appState.loading}
         <div class="terminal-loading">
-          <Loading progress={$progress} />
+          <Loading progress={appState.progress} />
         </div>
       {:else}
         <TerminalOutput />
       {/if}
     </div>
 
-    {#if !$loading}
+    {#if !appState.loading}
       <TerminalInput />
     {/if}
   </div>
@@ -100,5 +100,4 @@
       border-width: 1px;
     }
   }
-
 </style>

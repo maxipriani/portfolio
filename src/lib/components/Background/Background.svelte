@@ -7,12 +7,20 @@
   onMount(() => {
     if (!container) return;
 
+    const isMobile = window.innerWidth < 768;
+    const CONFIG = {
+      nodes: isMobile ? 50 : 120,
+      particles: isMobile ? 600 : 2000,
+      maxDist: isMobile ? 18 : 20,
+      maxConn: isMobile ? 6 : 10
+    };
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !isMobile });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
@@ -30,17 +38,17 @@
       mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
+    if (!isMobile) {
+      document.addEventListener('mousemove', handleMouseMove);
+    }
 
     const networkGroup = new THREE.Group();
     const nodes = [];
-    const numNodes = 120;
 
-    for (let i = 0; i < numNodes; i++) {
-      const phi = Math.acos(-1 + (2 * i) / numNodes);
-      const theta = Math.sqrt(numNodes * Math.PI) * phi;
+    for (let i = 0; i < CONFIG.nodes; i++) {
+      const phi = Math.acos(-1 + (2 * i) / CONFIG.nodes);
+      const theta = Math.sqrt(CONFIG.nodes * Math.PI) * phi;
       const radius = 10 + Math.random() * 30;
-
       const x = radius * Math.cos(theta) * Math.sin(phi);
       const y = radius * Math.sin(theta) * Math.sin(phi);
       const z = radius * Math.cos(phi);
@@ -63,23 +71,19 @@
       nodes.push({ mesh: node, pos: new THREE.Vector3(x, y, z) });
     }
 
-    const MAX_DIST = 20;
-    const MAX_CONNECTIONS = 10;
-
     for (let i = 0; i < nodes.length; i++) {
       const candidates = [];
-
       for (let j = 0; j < nodes.length; j++) {
         if (i === j) continue;
         const d = nodes[i].pos.distanceTo(nodes[j].pos);
-        if (d < MAX_DIST) candidates.push({ j, d });
+        if (d < CONFIG.maxDist) candidates.push({ j, d });
       }
 
       candidates
         .sort((a, b) => a.d - b.d)
-        .slice(0, MAX_CONNECTIONS)
+        .slice(0, CONFIG.maxConn)
         .forEach(({ j, d }) => {
-          const opacity = Math.min(0.12, Math.max(0.0, (1 - d / MAX_DIST) * 0.15));
+          const opacity = Math.min(0.12, Math.max(0.0, (1 - d / CONFIG.maxDist) * 0.15));
           const lineMaterial = new THREE.LineBasicMaterial({
             color: 0x00ff00,
             transparent: true,
@@ -106,10 +110,8 @@
     scene.add(pointLight2);
 
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 2000;
-    const posArray = new Float32Array(particlesCount * 3);
-
-    for (let i = 0; i < particlesCount * 3; i++) {
+    const posArray = new Float32Array(CONFIG.particles * 3);
+    for (let i = 0; i < CONFIG.particles * 3; i++) {
       posArray[i] = (Math.random() - 0.5) * 400;
     }
 
@@ -130,23 +132,25 @@
 
     const animate = () => {
       animationId = requestAnimationFrame(animate);
-
+      
       networkGroup.rotation.y += 0.002;
       networkGroup.rotation.x = Math.sin(Date.now() * 0.0002) * 0.15;
-
+      
       nodes.forEach((node, i) => {
         const pulse = Math.sin(Date.now() * 0.002 + i * 0.5) * 0.3 + 1;
         node.mesh.scale.set(pulse, pulse, pulse);
         node.mesh.rotation.x += 0.008;
         node.mesh.rotation.y += 0.008;
       });
-
+      
       particlesMesh.rotation.y += 0.0003;
 
-      camera.position.x += (mouseX * 3 - camera.position.x) * 0.05;
-      camera.position.y += (mouseY * 3 + 5 - camera.position.y) * 0.05;
+      if (!isMobile) {
+        camera.position.x += (mouseX * 3 - camera.position.x) * 0.05;
+        camera.position.y += (mouseY * 3 + 5 - camera.position.y) * 0.05;
+      }
+      
       camera.lookAt(scene.position);
-
       renderer.render(scene, camera);
     };
 
@@ -157,14 +161,14 @@
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     };
-
+    
     window.addEventListener('resize', handleResize);
 
     return () => {
       cancelAnimationFrame(animationId);
       document.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
-
+      
       scene.traverse((object) => {
         if (object.geometry) object.geometry.dispose();
         if (object.material) {
@@ -175,9 +179,8 @@
           }
         }
       });
-
+      
       renderer.dispose();
-
       if (container && renderer.domElement) {
         container.removeChild(renderer.domElement);
       }
