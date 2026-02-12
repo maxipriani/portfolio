@@ -1,6 +1,9 @@
 import { CONFIG } from './config/index.js';
 import { getContent } from './content/index.js';
 
+const DOWNLOAD_INTERVAL_MS = 50;
+const DOWNLOAD_TOTAL_STEPS = 20;
+
 function generateId(index = 0) {
   return Date.now() + Math.random() + index;
 }
@@ -196,20 +199,18 @@ class PortfolioState {
     ]);
 
     const currentLineId = this.lines[0].id;
-
-    const totalSteps = 20;
     let step = 0;
 
     this.cvInterval = setInterval(() => {
       step++;
-      const percent = Math.round((step / totalSteps) * 100);
+      const percent = Math.round((step / DOWNLOAD_TOTAL_STEPS) * 100);
 
       const lineIndex = this.lines.findIndex((l) => l.id === currentLineId);
       if (lineIndex !== -1) {
         this.lines[lineIndex].progress = percent;
       }
 
-      if (step >= totalSteps) {
+      if (step >= DOWNLOAD_TOTAL_STEPS) {
         clearInterval(this.cvInterval);
         this.cvInterval = null;
 
@@ -222,7 +223,7 @@ class PortfolioState {
         link.click();
         document.body.removeChild(link);
       }
-    }, 50);
+    }, DOWNLOAD_INTERVAL_MS);
   }
 
   showError(command) {

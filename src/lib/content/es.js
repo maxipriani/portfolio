@@ -58,15 +58,14 @@ export const es = {
       {
         name: 'rs-market',
         url: 'https://github.com/maxipriani/rs-market',
-        description:
-          'Marketplace de gift cards 100% en Rust.',
+        description: 'Marketplace de gift cards 100% en Rust.',
         tags: ['Rust'],
       },
       {
         name: 'Volcano',
         url: 'https://github.com/maxipriani/volcano',
         description:
-        'External ESP para CS2: WinAPI + Steam handle hijacking para cross-process memory reads; offsets fetched en runtime, auth via API y un overlay con ImGui.',
+          'External ESP para CS2: WinAPI + Steam handle hijacking para cross-process memory reads; offsets fetched en runtime, auth via API y un overlay con ImGui.',
         tags: ['C++', 'Go'],
       },
     ],

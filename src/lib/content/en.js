@@ -58,15 +58,14 @@ export const en = {
       {
         name: 'rs-market',
         url: 'https://github.com/maxipriani/rs-market',
-        description:
-        'Rust-based gift card marketplace.',
+        description: 'Rust-based gift card marketplace.',
         tags: ['Rust'],
       },
       {
         name: 'Volcano',
         url: 'https://github.com/maxipriani/volcano',
         description:
-        'External ESP for CS2 leveraging the WinAPI and Steam handle hijacking to perform cross-process memory reads, with offsets fetched at runtime, API-based authentication, and an ImGui overlay.',
+          'External ESP for CS2 leveraging the WinAPI and Steam handle hijacking to perform cross-process memory reads, with offsets fetched at runtime, API-based authentication, and an ImGui overlay.',
         tags: ['C++', 'Go'],
       },
     ],

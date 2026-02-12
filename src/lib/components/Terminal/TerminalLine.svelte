@@ -1,20 +1,11 @@
 <script>
-  import { CONFIG } from '../../config/index.js';
+  import { CONFIG, ICONS } from '../../config/index.js';
   import { appState } from '../../state.svelte.js';
   import Loading from '../Loading/Loading.svelte';
+  import TypingText from './TypingText.svelte';
+  import ScrambleText from './ScrambleText.svelte';
 
   let { line } = $props();
-  
-  const techIcons = {
-    'Rust': 'devicon-rust-plain',
-    'Go': 'devicon-go-original-wordmark',
-    'C++': 'devicon-cplusplus-plain',
-  };
-  
-  const contactIcons = {
-    LinkedIn: 'devicon-linkedin-plain',
-    GitHub: 'devicon-github-original',
-  };
 
   function handleEmailClick() {
     window.location.href = `mailto:${CONFIG.email}`;
@@ -33,7 +24,7 @@
     role="link"
     tabindex="0"
   >
-    {text}
+    <span class="link-cursor"><ScrambleText text={text} speed={25} iterations={2} /><span class="blink">_</span></span>
   </span>
 {/snippet}
 
@@ -58,8 +49,8 @@
     role="link"
     tabindex="0"
   >
-    {#if contactIcons[icon]}
-      <i class={contactIcons[icon]}></i>
+    {#if ICONS.contact[icon]}
+      <i class={ICONS.contact[icon]}></i>
     {/if}
     <span class="contact-text">{text}</span>
   </span>
@@ -75,7 +66,7 @@
       onclick={() => openUrl(url)}
       onkeypress={() => openUrl(url)}
     >
-      {company}
+      <span class="link-cursor"><ScrambleText text={company} speed={25} iterations={2} /><span class="blink">_</span></span>
     </span>
   {:else if company}
     <span>{company}</span>
@@ -86,8 +77,8 @@
   <div class="tags-container">
     {#each tags as tag}
       <span class="tag-badge">
-        {#if techIcons[tag]}
-          <i class={techIcons[tag]}></i>
+        {#if ICONS.tech[tag]}
+          <i class={ICONS.tech[tag]}></i>
         {/if}
         {tag}
       </span>
@@ -117,7 +108,9 @@
     <Loading progress={line.progress} text={line.text} compact={true} />
 
   {:else if line.type === 'greeting'}
-    <span class="greeting-text">{line.text}</span>
+    <span class="greeting-text">
+      <TypingText text={line.text} speed={45} />
+    </span>
 
   {:else if line.type === 'project-tags' && Array.isArray(line.text)}
     {@render projectTags(line.text)}
@@ -194,6 +187,18 @@
   .project-title:hover {
     color: var(--color-link-hover);
     text-shadow: 0 0 20px var(--color-link), 0 0 40px var(--color-link-hover);
+  }
+  .link-cursor .blink {
+    animation: blink-cursor 1s step-end infinite;
+    opacity: 0;
+  }
+  .project-title:hover .link-cursor .blink,
+  .company-link:hover .link-cursor .blink {
+    opacity: 1;
+  }
+  @keyframes blink-cursor {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
   }
 
   .line-project-desc {
@@ -282,13 +287,6 @@
     line-height: 1.6;
     text-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
     border-left: 2px solid rgba(0, 255, 0, 0.25);
-  }
-
-  .work-title-link {
-    color: var(--term-color);
-    font-size: 0.9em;
-    text-decoration: none;
-    text-shadow: var(--text-shadow-md);
   }
 
   .company-link {

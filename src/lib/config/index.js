@@ -5,3 +5,15 @@ export const CONFIG = {
   github: 'https://github.com/maxipriani',
   cvPath: '/cv.pdf',
 };
+
+export const ICONS = {
+  tech: {
+    Rust: 'devicon-rust-plain',
+    Go: 'devicon-go-original-wordmark',
+    'C++': 'devicon-cplusplus-plain',
+  },
+  contact: {
+    LinkedIn: 'devicon-linkedin-plain',
+    GitHub: 'devicon-github-original',
+  },
+};

@@ -38,15 +38,15 @@
   }
 
   .terminal-container {
-    background: rgba(0, 8, 0, 0.98);
-    border: 2px solid #00ff00;
+    background: var(--term-bg-panel);
+    border: 2px solid var(--term-color);
     display: flex;
     flex-direction: column;
     height: 100%;
     overflow: hidden;
     position: relative;
     box-shadow: 
-      0 0 30px rgba(0, 255, 0, 0.4),
+      0 0 30px var(--term-color-dim),
       0 0 60px rgba(0, 255, 0, 0.2),
       inset 0 0 80px rgba(0, 255, 0, 0.05);
   }
@@ -57,7 +57,7 @@
     left: -2px;
     right: -2px;
     bottom: -2px;
-    border: 2px solid #00ff00;
+    border: 2px solid var(--term-color);
     pointer-events: none;
     filter: blur(4px);
     opacity: 0.6;
@@ -88,7 +88,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 20, 0, 0.5);
+    background: var(--term-bg-translucent);
   }
 
   @media (max-width: 768px) {
