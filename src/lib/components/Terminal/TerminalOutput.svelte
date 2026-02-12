@@ -1,12 +1,15 @@
 <script>
+  import { tick } from 'svelte';
   import { appState } from '../../state.svelte.js';
   import TerminalLine from './TerminalLine.svelte';
 
   let outputRef;
 
   $effect(() => {
-    if (outputRef && appState.lines) {
-      outputRef.scrollTop = outputRef.scrollHeight;
+    if (appState.lines) {
+      tick().then(() => {
+        if (outputRef) outputRef.scrollTop = 0;
+      });
     }
   });
 </script>
