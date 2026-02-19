@@ -217,8 +217,8 @@ class PortfolioState {
         this.lines.push({ text: 'OK', type: 'output' });
 
         const link = document.createElement('a');
-        link.href = CONFIG.cvPath;
-        link.download = 'cv.pdf';
+        link.href = `/cv-${this.lang}.pdf`;
+        link.download = `cv-${this.lang}.pdf`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
