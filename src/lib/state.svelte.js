@@ -193,7 +193,7 @@ class PortfolioState {
     this.updateSection('CV', [
       {
         type: 'progress-bar',
-        text: '[ DOWNLOADING CV... ]',
+        text: this.content.cv.downloadingText,
         progress: 0,
       },
     ]);

@@ -76,6 +76,7 @@ export const en = {
   cv: {
     title: 'CV',
     downloadText: '[ DOWNLOAD CV ]',
+    downloadingText: '[ DOWNLOADING CV... ]',
   },
   errorNotFound: 'Command not found:',
   errorHint: "Type 'help' for available commands",
